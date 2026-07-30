@@ -28,7 +28,7 @@ class InwxProvider:
     def name(self) -> str:
         return "inwx"
 
-    def __enter__(self) -> "InwxProvider":
+    def __enter__(self) -> InwxProvider:
         from INWX.Domrobot import ApiClient, ApiType  # type: ignore[import]
 
         self._client = ApiClient(api_url=self._api_url, api_type=ApiType.XML_RPC)

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .severity import Severity
 from .record import NormalizedRecord
+from .severity import Severity
 
 
 @dataclass

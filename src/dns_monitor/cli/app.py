@@ -56,7 +56,10 @@ def zones() -> None:
     _load_env()
     providers = _build_providers()
     if not providers:
-        err.print("[red]No providers configured.[/red] Set INWX_USERNAME/INWX_PASSWORD or CF_API_TOKEN.")
+        err.print(
+            "[red]No providers configured.[/red] "
+            "Set INWX_USERNAME/INWX_PASSWORD or CF_API_TOKEN."
+        )
         raise typer.Exit(1)
     table = Table("Provider", "Zone", title="DNS Zones")
     for p in providers:
@@ -86,13 +89,18 @@ def baseline(
                 zones_data[key] = p.get_records(z)
     snap_io.save(zones_data, snapshot)
     total = sum(len(v) for v in zones_data.values())
-    console.print(f"[green]Baseline saved[/green] → {snapshot} ({total} records across {len(zones_data)} zones)")
+    console.print(
+        f"[green]Baseline saved[/green] → {snapshot} "
+        f"({total} records across {len(zones_data)} zones)"
+    )
 
 
 @app.command()
 def check(
     snapshot: Path = typer.Option(_DEFAULT_SNAPSHOT, help="Baseline snapshot path"),
-    policies_file: str = typer.Option(None, "--policies", help="Python file exporting policies / drift_policies lists"),
+    policies_file: str = typer.Option(
+        None, "--policies", help="Python file exporting policies / drift_policies lists"
+    ),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Show INFO violations too"),
 ) -> None:
     """Check current DNS state against guards and baseline drift."""
@@ -123,7 +131,9 @@ def check(
                 all_violations.extend(run_policies(records, point_policies))
 
     if base_data is None:
-        console.print("[yellow]No baseline found — run 'dns-monitor baseline' first to enable drift detection.[/yellow]")
+        console.print(
+            "[yellow]No baseline found — run 'dns-monitor baseline' first to enable drift detection.[/yellow]"
+        )
     else:
         for key, records in current_zones.items():
             zone_label = key.split(":", 1)[1] if ":" in key else key

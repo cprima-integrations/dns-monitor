@@ -23,7 +23,7 @@ class CloudflareProvider:
     def name(self) -> str:
         return "cloudflare"
 
-    def __enter__(self) -> "CloudflareProvider":
+    def __enter__(self) -> CloudflareProvider:
         import cloudflare  # type: ignore[import]
 
         self._cf = cloudflare.Cloudflare(api_token=self._api_token)
