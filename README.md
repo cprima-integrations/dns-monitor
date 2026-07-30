@@ -83,4 +83,4 @@ Grain returned: `dns_monitor.inwx_zones` — list of zone names.
 
 ## License
 
-MIT
+Apache 2.0
