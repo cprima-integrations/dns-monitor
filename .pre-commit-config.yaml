@@ -25,3 +25,12 @@ repos:
         entry: bash .githooks/strip-coauthored-by.sh
         language: system
         stages: [commit-msg]
+
+  # ----- Formatting ---------------------------------------------------------------------------->
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.0
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+  # <---- Formatting -----------------------------------------------------------------------------
